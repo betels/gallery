@@ -32,8 +32,11 @@
 
 <p>
   <strong>Url:</strong>
-  <%= @art.url %>
+    <%= @art.url %>
 </p>
-
+<p>
+   <%= link_to (image_tag @art.url, :style => "height:100px;width:150px"), @art %>
+</p>
 <%= link_to 'Edit', edit_art_path(@art) %> |
 <%= link_to 'Back', arts_path %>
+<a href="/cart/<%= @art.id %>">Add to Cart</a>

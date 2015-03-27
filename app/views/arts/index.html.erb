@@ -1,37 +1,71 @@
 <p id="notice"><%= notice %></p>
 
+
 <h1>Listing Arts</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Art</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Catagory</th>
-      <th>Size</th>
-      <th>Price</th>
-      <th>Url</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<table class="table table-striped">
 
   <tbody>
     <% @arts.each do |art| %>
       <tr>
-        <td><%= art.art_id %></td>
-        <td><%= art.name %></td>
-        <td><%= art.description %></td>
-        <td><%= art.catagory %></td>
-        <td><%= art.size %></td>
-        <td><%= art.price %></td>
-        <td><%= art.url %></td>
-        <td><%= link_to 'Show', art %></td>
-        <td><%= link_to 'Edit', edit_art_path(art) %></td>
-        <td><%= link_to 'Destroy', art, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+         <div class= "image"> 
+             <%= link_to (image_tag art.url, :style => "height:100px;width:150px"), art %>
+         </div>
+        </td>
+        <td>
+          <table>
+            <tr>
+              <td class="item-details-title">
+              	<div class="name">
+              	  <label>Name: </label>
+              	</div>
+            	</td>
+            	<td class="item-details-description">	<%= art.name %> </td>
+          	</tr>
+          	<tr>
+          	  <td class="item-details-title">
+              	<div class="description">
+                  <label>Description: </label>
+              	</div>
+            	</td>
+            	<td class="item-details-description"><%= art.description %></td>
+          	</tr>
+          	<tr>
+          	  <td class="item-details-title">
+              	<div class="catagory">
+              	  <label>Catagory: </label>
+              	</div>
+          	  </td>
+          	  <td class="item-details-description"><%= art.catagory %></td>
+          	</tr>
+          	<tr>
+          	  <td class="item-details-title">
+              	<div class="size">
+              	  <label>Size: </label>
+              	</div>
+              </td>
+              <td class="item-details-description"><%= art.size %></td>
+          	</tr>
+          	<tr>
+          	  <td class="item-details-title">
+              	<div class ="price">
+              	  <label>Price: </label>
+              	</div>
+               </td>
+               <td class="item-details-description"> &#8364; <%= art.price %></td>
+          	</tr>
+        	</table>
+          <div class="links action-bar">
+            <%= link_to 'Show', art, class: "action-link action-link-first" %>
+            <%= link_to 'Edit', edit_art_path(art), class: "action-link" %>
+            <%= link_to 'Delete', art, method: :delete, data: { confirm: 'Are you sure?' }, class: "action-link" %>
+          </div>
+        </td>
       </tr>
     <% end %>
   </tbody>
+  
 </table>
 
 <br>
