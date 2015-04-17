@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   before_action:set_cart_details
   
-  ######-----  Cart details -------######
+ 
   def set_cart_details
     cart = session[:cart]
     @total_price = 0

@@ -1,11 +1,11 @@
 class CartController < ApplicationController
  
-  ##############--------------##############
+ 
   def index
     @cart = session[:cart] || {}
   end
   
-  ##############--------------##############
+ 
   def add
     id = params[:id]
     cart = session[:cart] ||= {}
@@ -13,7 +13,7 @@ class CartController < ApplicationController
     redirect_to :action => :index
   end
   
-  ##############--------------##############
+ 
   def change
     cart = session[:cart]
     id = params[:id];
@@ -28,19 +28,19 @@ class CartController < ApplicationController
     redirect_to :action => :index
   end
   
-  ###---------####
+ 
   def checkout
     add_to_history
     @purchasehistories = PurchaseHistory.where(user_id: current_user.id)
   end
-######....#####
+
  def thankyou 
   
  end
   
 
  
-  ### -- ---###
+  
   def add_to_history
     cart = session[:cart]                                                                                
     cart.each do | id, quantity |
