@@ -1,6 +1,6 @@
 class ArtsController < ApplicationController
   before_action :set_art, only: [:show, :edit, :update, :destroy]
-
+  
   # GET /arts
   # GET /arts.json
   def index
@@ -60,7 +60,7 @@ class ArtsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+   
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_art

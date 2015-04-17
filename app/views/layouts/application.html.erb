@@ -1,53 +1,120 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Gallery</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  
-  <div id="header">
-    <table>
-      <tr>
-        <td>
-           <div id="logoimage">
-             <img  src="/assets/galleryimages/logo.jpg"/>
-           </div>
-         </td>
-         <td>
-           <div id="formsearch">
-            <form class="navbar-form" role="search" style="float:left">
-             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
-                <div class="input-group-btn">
-                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                </div>
-              </div>
-            </form>            
-            <div> SignUp |</div> <div>Login</div>
-           </div>
-           <div class="menu-bar">
-                <ul class="nav nav-tabs">
-               <li role="presentation" class="active"><a href="/arts">Home</a></li>
-               <li role="presentation" class="active"><a href="/gallery">Gallery</a></li>
-               <li role="presentation" class="active"><a href="/about">About</a></li>
-               <li role="presentation" class="active"><a href="/contact">Contact Us</a></li>
-             </ul>
-                  </div>
-            </div>
-           </div>
-         </td>
-       </tr>
-     </table>
-  </div>
-  
-  <div id="content">
-    <%= yield %>
-  </div>
-<div class="footer">
-      <p>© gallery</p>
-  </div>
-</body>
+	<head>
+		<title>Gallery</title>
+
+		<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+		<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+		<%= csrf_meta_tags %>
+
+	</head>
+	<body>
+		<div id="main">
+			<div id="header">
+
+				<table>
+					<tr>
+						<td>
+						<div id="logo">
+							<img  src="/assets/galleryimages/IconArtGallery.jpg" border="0"
+							alt style="border-top:0px solid;border-right:0px solid;border-bottom:0px solid;border-left:0px solid">
+						</div></td>
+						<td>
+						<div id="cart">
+							<a href="/cart"> <!-- view cart(!--> <%=@total_arts%> <img src="/assets/cart.png" height="10%" width="10%"/> <!--arts, Total: !-->€
+							<%=@total_price%>) </a>
+						</div>
+						<div id="rightdiv">
+							<div id="searchbtn">
+								<form class="navbar-form" role="search" >
+									<div class="input-group">
+										<input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+										<div class="input-group-btn">
+											<button class="btn btn-default" type="submit">
+												<i class="glyphicon glyphicon-search"></i>
+											</button>
+
+										</div>
+									</div>
+								</form>
+							</div>
+
+							<div id="headlinks">
+								<div>
+									<%= link_to "SignUp  |", signup_path %>
+								</div>
+								<% if logged_in? %>
+								<%= link_to "Log out  |", logout_path, method: "post" %>
+								<% if current_user.admin? %>
+								<%= link_to "Users |", users_path %>|
+								<br>
+								<% end %>
+								<%= link_to "Edit Profile", edit_user_path(current_user) %>
+								<% else %>
+								<%= link_to "Log in   | ", login_path %>
+								<% end %>
+							</div>
+						</div>
+						<div id="navigation-bar-rightdiv" class="left">
+							<div id="navigation-bar">
+								<ul class="nav nav-tabs">
+									<li class="active">
+										<a href="/arts" class="nav-link">Home</a>
+									</li>
+
+									<li>
+										<a href="/about" class="nav-link">About </a>
+									</li>
+
+									<li>
+										<a href="/contact" class="nav-link">Contact</a>
+									</li>
+								</ul>
+							</div>
+						</div><div>
+
+						</div>
+						<br>
+			</div>
+
+		</div>
+		</td>
+		</tr>
+		</table>
+		</div>
+
+		<div id="maincontent">
+
+		
+
+			<div id="right">
+				<div>
+					<% flash.each do |message_type, message| %>
+					<div class="alert alert-<%= message_type %>">
+						<%= message %>
+					</div>
+					<% end %>
+				</div>
+				
+				<!-- main content goes here -->
+				<div id="content">
+					<%= yield %>
+				</div>
+
+			</div>
+		</div>
+		<div id="footer">
+			<div>
+				<a href="#"><img class="social" src="/assets/galleryimages/f.png" alt="facebook"></a>
+				<a href="#"><img class="social" src="/assets/galleryimages/c.png" alt="chrome"></a>
+				<a href="#"><img class="social" src="/assets/galleryimages/y.png"  alt="yahoo"></a>
+				<a href="#"><img class="social" src="/assets/galleryimages/s.jpg" alt="twitter"> </a>
+				<a href="#"> <img class="social" src="/assets/galleryimages/t.png"  alt="twitter"></a>
+			</div>
+			<p>
+				© Copyright 2015 artsgallery
+			</p>
+		</div>
+		</div>
+	</body>
 </html>

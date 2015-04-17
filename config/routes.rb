@@ -1,12 +1,31 @@
 Rails.application.routes.draw do
  
+  
+
+  get 'sessions/new'
+
+ # get '/users/new'
+  get '/users' => 'users#index'
+  get '/users/show' 
+  get '/users/:id' => 'users#show'
+
   get '/about' => 'site#about'
   get '/contact' => 'site#contact' 
   get '/gallery' => 'site#gallery' 
   
+  get '/cart' => 'cart#index'
+  get '/cart/:id' => 'cart#add'
+  get '/checkout' => 'cart#checkout'
+  get '/thankyou' => 'cart#thankyou'
+  
+  get 'signup'  => 'users#new'
+  get 'login'   => 'sessions#new'
+  post 'login'   => 'sessions#create'
+  post 'logout'  => 'sessions#destroy' 
 
   resources :arts
-
+  resources :users
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

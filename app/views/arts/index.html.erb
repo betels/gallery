@@ -56,18 +56,24 @@
                <td class="item-details-description"> &#8364; <%= art.price %></td>
           	</tr>
         	</table>
-          <div class="links action-bar">
-            <%= link_to 'Show', art, class: "action-link action-link-first" %>
-            <%= link_to 'Edit', edit_art_path(art), class: "action-link" %>
-            <%= link_to 'Delete', art, method: :delete, data: { confirm: 'Are you sure?' }, class: "action-link" %>
+          
+          <div class="links">
+            <% if current_user && current_user.admin? %>
+              <%= link_to 'Edit', edit_art_path(art) %> |
+              <%= link_to 'Delete', art, :data => {:confirm => 'Are you sure?'}, :method => :delete %>|
+              <%= link_to 'Show', art, class: "action-link action-link-first" %>
+            <% else %>
+              <a href="/cart/<%= art.id %>">Add to Cart</a><br><br>
+            <% end %>
           </div>
+       
         </td>
       </tr>
     <% end %>
   </tbody>
   
 </table>
-
+ 
 <br>
 
 <%= link_to 'New Art', new_art_path %>

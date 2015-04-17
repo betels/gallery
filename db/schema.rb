@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150324143602) do
+ActiveRecord::Schema.define(version: 20150414161346) do
 
   create_table "arts", force: :cascade do |t|
     t.integer  "art_id"
@@ -23,6 +23,26 @@ ActiveRecord::Schema.define(version: 20150324143602) do
     t.string   "url"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "purchase_histories", force: :cascade do |t|
+    t.integer  "art_id"
+    t.string   "title"
+    t.float    "price"
+    t.integer  "quantity"
+    t.float    "total"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "password_digest"
+    t.boolean  "admin",           default: false
   end
 
 end
