@@ -1,0 +1,40 @@
+<% provide(:title, @user.name) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= gravatar_for @user %>
+         <p>Hi <%= @user.name %>,</p> <%= @user.name %>
+               </h1>
+        
+ </section>
+  </aside>
+  </div>
+ <div>
+   <% 
+    @cart = session[:cart]
+    total = 0 
+    counter = 0
+    %>
+    
+    </br>
+         <p><h2>Purchase History</h2></p>
+ <% countr = 0 %>
+<table>
+    <tr> <th></th> <th>Art Id</th> <th>Title</th> <th>Price</th> <th>Quantity</th> <th>Total</th> </tr>
+    <% if !@purchasehistories.blank? %>
+        <%  @purchasehistories.each do | purchasehistory | %>
+            <% countr = countr + 1 %>
+            <tr>
+                <td> <%= countr %></td>
+                 <td> <%= purchasehistory.art_id %> </td>
+                <td> <%= purchasehistory.title %> </td>
+                <td> <%= purchasehistory.price %> </td>
+                <td> <%= purchasehistory.quantity %> </td>
+                <td> <%= purchasehistory.total %> </td>
+            </tr>
+        <% end %>
+     <% end %>
+     </table>
+     </div>
+ 

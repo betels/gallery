@@ -1,0 +1,61 @@
+<h1>Shooping Cart</h1>
+
+<% if @cart.empty? %>
+    <p>Your Cart is empty.</p>
+<% end %>
+
+<% 
+    total = 0 
+    counter = 0
+%>
+	
+<table class="cart">
+    <tr>
+        <td class="legend"></td>
+        <td class="legend">Art</td>
+        <td class="legend">Price</td>
+        <td class="legend">Qty</td>
+        <td class="legend">Total</td>
+        <td class="legend">Remove</td>
+    </tr>
+	
+    <% @cart.each do | id, quantity | %>
+        <% art = Art.find_by_id(id)
+        counter = counter + 1 %>
+        <tr>
+            <td>
+                <div class="image">
+                    <%= link_to (image_tag art.url, :style => "height:40px"), art %>
+                </div>
+            </td>
+            <td class="title"><%= link_to art.name, art %></td>
+            <td class="price"><%= number_to_currency(art.price) %></td>
+            <td class="quantity"><%= quantity %><br /></td>
+            <td class="price">
+               <%= number_to_currency(quantity * art.price, :unit => "€") %>
+            </td>
+            <td class="action">
+                <!-- TODO -->|
+            </td>
+        </tr>
+        <% total += quantity * art.price %>
+    <% end %>
+
+    <tr>
+        <td colspan="4">
+            <div class="total">Total:</div>
+        </td>
+        <td>
+            <div class="price"><%= number_to_currency(total, :unit => "€") %></div>
+        </td>
+    </tr>
+</table>
+
+<p>
+     <%= link_to 'Continue Shopping', :controller => :arts %>  
+     <% if current_user && logged_in? %>
+       | <a href="/checkout"> Check out</a>
+     <% end %>
+</p>
+<p>number of items in your cart = <%= counter %> </p>
+
