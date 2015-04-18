@@ -35,7 +35,7 @@ class CartController < ApplicationController
   end
 
  def thankyou 
-  
+   session[:cart] = nil
  end
   
 
