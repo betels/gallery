@@ -21,8 +21,16 @@
 						</div></td>
 						<td>
 						<div id="cart">
-							<a href="/cart"> <%=@total_arts%> <img src="/assets/cart.png" height="10%" width="10%"/> €
-							<%=@total_price%>) </a>
+							<a href="/cart"> 
+								<%=@total_arts%>
+							    <% if @total_arts > 1 %>
+									 Items
+								<% else %>
+									Item
+								<% end %>
+								<img src="/assets/cart.png" height="10%" width="10%"/>
+								Total:  <%= number_to_currency(@total_price, :unit => "€")  %> 
+							</a>
 						</div>
 						<div id="rightdiv">
 							<div id="searchbtn">
