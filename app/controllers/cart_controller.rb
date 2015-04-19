@@ -53,7 +53,7 @@ class CartController < ApplicationController
                                                   quantity: quantity, 
                                                   total: (quantity * art.price), 
                                                   user_id: current_user.id
-                                                  )
+                                                )
         @purchaseHistory.save
    
    end

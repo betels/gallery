@@ -9,7 +9,6 @@ class UsersController < ApplicationController
   end
   def show
     @user = User.find(params[:id])
-    #add_to_history
  @purchasehistories = PurchaseHistory.where(user_id: current_user.id)
  
   end
@@ -55,7 +54,7 @@ class UsersController < ApplicationController
    
    # 
    def correct_user
-      @user = User.find(params[:id])
+      @user = User.find_by(id: params[:id])
       redirect_to(root_url) unless @user == current_user
       redirect_to(root_url) unless current_user?(@user)
    end
@@ -79,21 +78,4 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
     
-    def add_to_history
-    cart = session[:cart]                                                                                
-    cart.each do | id, quantity |
-      art = Art.find_by_id(id)
-     
-        @purchaseHistory = PurchaseHistory.new(
-                                                  art_id: art.art_id, 
-                                                  title: art.name, 
-                                                  price: art.price, 
-                                                  quantity: quantity, 
-                                                  total: (quantity * art.price), 
-                                                  user_id: current_user.id
-                                                  )
-        @purchaseHistory.save
-   
-   end
-    end
 end
